@@ -8,22 +8,22 @@ const askUser = () => {
         {
             type: 'input',
             message: 'What is your team manager\'s name?',
-            name: 'managers-name',
+            name: 'managersName',
         },
         {
             type: 'input',
             message: 'What is your team manager\'s employee ID?',
-            name: 'managers-id',
+            name: 'managersId',
         },
         {
             type: 'input',
             message: 'What is your team manager\'s email address?',
-            name: 'managers-email',
+            name: 'managersEmail',
         },
         {
             type: 'input',
             message: 'What is your team manager\'s office number?',
-            name: 'managers-number',
+            name: 'managersNumber',
         },
         {
             type: 'list',
@@ -34,7 +34,7 @@ const askUser = () => {
         }
     ])
         .then(({ role }) => {
-            if (role = "enginner") {
+            if (role == "engineer") {
                 engineerInfo();
             }
 
@@ -42,7 +42,9 @@ const askUser = () => {
                 internInfo();
             }
 
-            else (this) => {
+            else if (role = "finish building my team") {
+                init();
+                appendCards();
                 return;
             }
         });
@@ -52,22 +54,22 @@ const engineerInfo = () => {
     return inquirer.prompt([{
         type: 'input',
         message: 'What is your team engineer\'s name?',
-        name: 'enigneers-name',
+        name: 'engineersName',
     },
     {
         type: 'input',
-        message: 'What is your team enigneer\'s employee ID?',
-        name: 'enigneer-id',
+        message: 'What is your team engineer\'s employee ID?',
+        name: 'engineersId',
     },
     {
         type: 'input',
-        message: 'What is your team enigneer\'s email address?',
-        name: 'enigneer-email',
+        message: 'What is your team engineer\'s email address?',
+        name: 'engineersEmail',
     },
     {
         type: 'input',
-        message: 'What is your team enigneer\'s GitHub username?',
-        name: 'Github-user',
+        message: 'What is your team engineer\'s GitHub username?',
+        name: 'githubUser',
     },
     {
         type: 'list',
@@ -78,7 +80,7 @@ const engineerInfo = () => {
     }
     ])
         .then(({ role }) => {
-            if (role = "enginner") {
+            if (role == "engineer") {
                 engineerInfo();
             }
 
@@ -86,7 +88,9 @@ const engineerInfo = () => {
                 internInfo();
             }
 
-            else (this) => {
+            else if (role = "finish building my team") {
+                init();
+                appendCards();
                 return;
             }
         });
@@ -96,22 +100,22 @@ const internInfo = () => {
     return inquirer.prompt([{
         type: 'input',
         message: 'What is your team intern\'s name?',
-        name: 'interns-name',
+        name: 'internsName',
     },
     {
         type: 'input',
-        message: 'What is your team enigneer\'s employee ID?',
-        name: 'interns-id',
+        message: 'What is your team intern\'s employee ID?',
+        name: 'internsId',
     },
     {
         type: 'input',
         message: 'What is your team intern\'s email address?',
-        name: 'interns-email',
+        name: 'internsEmail',
     },
     {
         type: 'input',
         message: 'What is your team intern\'s school?',
-        name: 'intern-school',
+        name: 'internSchool',
     },
     {
         type: 'list',
@@ -123,7 +127,7 @@ const internInfo = () => {
 
     ])
         .then(({ role }) => {
-            if (role = "enginner") {
+            if (role == "engineer") {
                 engineerInfo();
             }
 
@@ -131,7 +135,9 @@ const internInfo = () => {
                 internInfo();
             }
 
-            else (this) => {
+            else if (role = "finish building my team") {
+                init();
+                appendCards();
                 return;
             }
         });
@@ -152,7 +158,12 @@ const createHtmlPage = () =>
 </head>
 
 <body>
+<div class="card-set" id="cardArea">
 
+
+
+
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -165,13 +176,30 @@ const createHtmlPage = () =>
 </html>`;
 
 
-const init = () => {
-    askUser()
+const init = (() => fs.writeFile('./dist/index.html', createHtmlPage(), (err) =>
+    err ? console.error(err) : console.log("Your HTML file is being created"))
 
-        .then(() => fs.writeFile('/dist/index.html', createHtmlPage(), (err) =>
-            err ? console.error(err) : console.log("Your HTML file is being created"))
-        );
+);
 
-};
 
-init();
+appendCards({ internsName, internsId, internsEmail, internSchool, managersName, managersId, managersEmail, managersNumber, engineersName, engineersId, engineersEmail, githubUser }){
+    const cardArea = document.getElementById('cardArea');
+    const div = document.createElement("div");
+    div.classList.add("cardArea");
+
+    const markup = `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Name: </h5>
+        <h6 class="card-subtitle mb-2 text-muted">Role: </h6>
+        <h6 class="card-subtitle mb-2 text-muted">Email: </h6>
+        <h6 class="card-subtitle mb-2 text-muted">Office: </h6>
+
+    </div>
+    `
+    div.innerHTML = markup;
+    cardArea.innerHTML = "";
+    cardArea.appendChild(div);
+}
+
+askUser();
+
