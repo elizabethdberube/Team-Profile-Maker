@@ -1,6 +1,6 @@
 const { it } = require("jest-circus");
 const { describe } = require("yargs");
-const Employee = require("./lib/employee");
+const Employee = require("../lib/employee");
 
 
 

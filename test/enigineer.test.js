@@ -1,6 +1,6 @@
 const { it } = require("jest-circus");
 const { describe } = require("yargs");
-const Engineer = require("./lib/engineer");
+const Engineer = require("../lib/engineer");
 
 
 
@@ -10,9 +10,7 @@ describe("engineer class", () => {
 
             const engineer = new Engineer([{ name: "Steve" }]);
 
-            engineer.getName();
-
-            expect(engineer.name).toBe("Steve");
+            expect(engineer.getName()).toBe("Steve");
 
         });
     });
@@ -25,9 +23,7 @@ describe("engineer class", () => {
 
             const engineer = new Engineer([{ id: "12" }]);
 
-            engineer.getId();
-
-            expect(engineer.id).toBe("12");
+            expect(engineer.getId()).toBe("12");
 
         });
     });
@@ -39,9 +35,7 @@ describe("engineer class", () => {
 
             const engineer = new Engineer([{ email: "steve@gmail.com" }]);
 
-            engineer.getEmail();
-
-            expect(engineer.email).toBe("steve@gmail.com");
+            expect(engineer.getEmail()).toBe("steve@gmail.com");
 
         });
     });
@@ -53,9 +47,7 @@ describe("engineer class", () => {
 
             const engineer = new Engineer([{ gitHub: "stevesmith" }]);
 
-            engineer.getGithub();
-
-            expect(engineer.gitHub).toBe("stevesmith");
+            expect(engineer.getGithub()).toBe("stevesmith");
 
         });
     });
@@ -67,9 +59,7 @@ describe("engineer class", () => {
 
             const engineer = new Engineer([{ engineer: "engineer" }]);
 
-            engineer.getRole();
-
-            expect(engineer).toBe("engineer");
+            expect(engineer.getRole()).toBe("engineer");
         });
     });
 });

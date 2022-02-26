@@ -1,4 +1,4 @@
-const Manager = require("./lib/manager");
+const Manager = require("../lib/manager");
 
 describe("manager class", () => {
     describe("getName method", () => {
@@ -18,7 +18,6 @@ describe("manager class", () => {
         it("get's manager id", () => {
 
             const manager = new Manager([{ id: "12" }]);
-
 
             expect(manager.getId()).toBe("12");
 
