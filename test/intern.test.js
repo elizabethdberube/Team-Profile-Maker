@@ -1,5 +1,4 @@
-const { it } = require("jest-circus");
-const { describe } = require("yargs");
+
 const Intern = require("../lib/intern");
 
 
