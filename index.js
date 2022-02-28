@@ -4,14 +4,18 @@ const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+//const managerArray = [];
+//const engineerArray = [];
+//const internArray = [];
 
-const askUser = () => {
+const askUser = (answers) => {
     return inquirer.prompt([
 
         {
             type: 'input',
             message: 'What is your team manager\'s name?',
             name: 'managersName',
+
         },
         {
             type: 'input',
@@ -36,6 +40,7 @@ const askUser = () => {
 
         }
     ])
+
         .then(({ role }) => {
             if (role == "engineer") {
                 engineerInfo();
@@ -161,6 +166,10 @@ const createHtmlPage = () =>
 </head>
 
 <body>
+<div class="jumbotron">
+<h1 class="display-4">Your Team</h1>
+<hr class="line">
+</div>
 <div class="card-set" id="cardArea">
 
 

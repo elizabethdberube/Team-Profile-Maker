@@ -4,11 +4,20 @@
 }
 
 body {
-  background-color: var(--otherGrey)
+ /* background-color: var(--otherGrey);*/
+  background-image: url("picture.jpg");
 }
 
 .jumbotron {
-    background-color: var(--grey);
+    background-color: black;
+    color: white;
+    border-radius: 0px 0px 20px black;
+
+}
+
+.line{
+  
+  background-color: var(--otherGrey);
 }
 
 .card-set {
@@ -22,6 +31,7 @@ body {
   .card {
 
     padding: 20px;
+    box-shadow: 0px 0px 20px black;
     
   }
 
