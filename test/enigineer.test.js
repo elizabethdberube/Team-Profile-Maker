@@ -44,7 +44,7 @@ describe("engineer class", () => {
     describe("getGithub method", () => {
         it("get's engineer's github", () => {
 
-            const engineer = new Engineer({ gitHub: "stevesmith" });
+            const engineer = new Engineer({ github: "stevesmith" });
 
             expect(engineer.getGithub()).toBe("stevesmith");
 
@@ -56,9 +56,9 @@ describe("engineer class", () => {
     describe("getRole method", () => {
         it("get's engineer's role", () => {
 
-            const engineer = new Engineer(engineer);
+            const engineer = new Engineer(Engineer);
 
-            expect(engineer.getRole()).toBe(engineer);
+            expect(engineer.getRole()).toBe(Engineer);
         });
     });
 });

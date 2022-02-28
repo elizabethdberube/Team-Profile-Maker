@@ -41,9 +41,9 @@ describe("Employee class", () => {
     describe("getRole method", () => {
         it("get's employee's role", () => {
 
-            const employee = new Employee({ manager: "manager" });
+            const employee = new Employee({ Employee });
 
-            expect(employee.getRole()).toBe("manager");
+            expect(employee.getRole()).toBe(Employee);
         });
     });
 });

@@ -43,9 +43,9 @@ describe("intern class", () => {
     describe("getSchool method", () => {
         it("get's intern's school", () => {
 
-            const intern = new Intern({ school: "the school for learning" });
+            const intern = new Intern({ school: "a school" });
 
-            expect(intern.getGithub()).toBe("the school for learning");
+            expect(intern.getSchool()).toBe("a school");
 
         });
     });
@@ -55,9 +55,10 @@ describe("intern class", () => {
     describe("getRole method", () => {
         it("get's intern's role", () => {
 
-            const intern = new Intern({ intern: "student" });
+            const intern = new Intern({ Intern });
 
-            expect(intern.getRole()).toBe("student");
+            expect(intern.getRole()).toBe(Intern);
+
         });
     });
 });
