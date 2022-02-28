@@ -4,12 +4,47 @@ const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-//const managerArray = [];
+let manager;
 //const engineerArray = [];
 //const internArray = [];
+let employeeArray = [];
 
-const askUser = (answers) => {
-    return inquirer.prompt([
+const mainLoop = () => {
+    askManager();
+    let keepGoing = true;
+
+    while (keepGoing == true) {
+        inquirer.prompt([
+            {
+                type: 'list',
+                message: 'Which of the following would you like to add?',
+                choices: ['engineer', 'intern', 'finish building my team'],
+                name: 'role',
+
+            }
+        ])
+            .then(({ role }) => {
+                if (role == "engineer") {
+                    engineerInfo();
+
+                }
+
+                else if (role = "intern") {
+                    internInfo();
+
+                }
+
+                else if (role = "finish building my team") {
+                    init();
+                    appendCards();
+                    return;
+                }
+            });
+    }
+}
+
+const askManager = () => {
+    inquirer.prompt([
 
         {
             type: 'input',
@@ -31,31 +66,12 @@ const askUser = (answers) => {
             type: 'input',
             message: 'What is your team manager\'s office number?',
             name: 'managersNumber',
-        },
-        {
-            type: 'list',
-            message: 'Which of the following would you like to add?',
-            choices: ['engineer', 'intern', 'finish building my team'],
-            name: 'role',
-
         }
+
     ])
+        .then({ managersName, managersId, managersEmail, managersNumber })
+    let newManager = new Manager({ name: managersName, id: managersId, email: managersEmail, officenumber: managersNumber });
 
-        .then(({ role }) => {
-            if (role == "engineer") {
-                engineerInfo();
-            }
-
-            else if (role = "intern") {
-                internInfo();
-            }
-
-            else if (role = "finish building my team") {
-                init();
-                appendCards();
-                return;
-            }
-        });
 }
 
 const engineerInfo = () => {
@@ -78,30 +94,10 @@ const engineerInfo = () => {
         type: 'input',
         message: 'What is your team engineer\'s GitHub username?',
         name: 'githubUser',
-    },
-    {
-        type: 'list',
-        message: 'Which of the following would you like to add?',
-        choices: ['engineer', 'intern', 'finish building my team'],
-        name: 'role',
-
     }
+
     ])
-        .then(({ role }) => {
-            if (role == "engineer") {
-                engineerInfo();
-            }
 
-            else if (role = "intern") {
-                internInfo();
-            }
-
-            else if (role = "finish building my team") {
-                init();
-                appendCards();
-                return;
-            }
-        });
 };
 
 const internInfo = () => {
@@ -124,31 +120,11 @@ const internInfo = () => {
         type: 'input',
         message: 'What is your team intern\'s school?',
         name: 'internSchool',
-    },
-    {
-        type: 'list',
-        message: 'Which of the following would you like to add?',
-        choices: ['engineer', 'intern', 'finish building my team'],
-        name: 'role',
-
     }
 
+
     ])
-        .then(({ role }) => {
-            if (role == "engineer") {
-                engineerInfo();
-            }
 
-            else if (role = "intern") {
-                internInfo();
-            }
-
-            else if (role = "finish building my team") {
-                init();
-                appendCards();
-                return;
-            }
-        });
 }
 
 const createHtmlPage = () =>
@@ -194,7 +170,8 @@ const init = (() => fs.writeFile('./dist/index.html', createHtmlPage(), (err) =>
 );
 
 
-appendCards({ internsName, internsId, internsEmail, internSchool, managersName, managersId, managersEmail, managersNumber, engineersName, engineersId, engineersEmail, githubUser }){
+const appendCards = () => {
+    ({ internsName, internsId, internsEmail, internSchool, managersName, managersId, managersEmail, managersNumber, engineersName, engineersId, engineersEmail, githubUser })
     const cardArea = document.getElementById('cardArea');
     const div = document.createElement("div");
     div.classList.add("cardArea");
@@ -213,5 +190,5 @@ appendCards({ internsName, internsId, internsEmail, internSchool, managersName, 
     cardArea.appendChild(div);
 }
 
-askUser();
+mainLoop();
 
