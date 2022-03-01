@@ -1,14 +1,14 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require("./lib/employee");
-const Manager = require("./lib/manager");
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
-let manager;
-//const engineerArray = [];
-//const internArray = [];
+const Employee = require("../lib/employee");
+const Manager = require("../lib/manager");
+const Engineer = require("../lib/engineer");
+const Intern = require("../lib/intern");
+
+
 let employeeArray = [];
 
+//the main loop that controls the flow of the whole thing.
 const mainLoop = () => {
     askManager();
     let keepGoing = true;
@@ -43,6 +43,7 @@ const mainLoop = () => {
     }
 }
 
+//inquirer prompt for questions about the manager
 const askManager = () => {
     inquirer.prompt([
 
@@ -69,11 +70,16 @@ const askManager = () => {
         }
 
     ])
+        //answers get pushed into array
         .then({ managersName, managersId, managersEmail, managersNumber })
+
     let newManager = new Manager({ name: managersName, id: managersId, email: managersEmail, officenumber: managersNumber });
+
+    employeeArray.push(newManager);
 
 }
 
+//inquirer prompt for questions about the engineer
 const engineerInfo = () => {
     return inquirer.prompt([{
         type: 'input',
@@ -97,9 +103,19 @@ const engineerInfo = () => {
     }
 
     ])
+        //answers get pushed into array
+        .then(({ engineersName, engineersId, engineersEmail, githubUser }) => engineerInfo.forEach = () => {
+
+
+            let newEngineer = new Engineer({ name: engineersName, id: engineersId, email: engineersEmail, github: githubUser });
+
+            employeeArray.push(newEngineer);
+
+        });
 
 };
 
+//inquirer prompt for questions about the intern
 const internInfo = () => {
     return inquirer.prompt([{
         type: 'input',
@@ -124,9 +140,18 @@ const internInfo = () => {
 
 
     ])
+        //answers get pushed into array
+        .then(({ internsName, internsId, internsEmail, internSchool }) => engineerInfo.forEach = () => {
 
-}
+            let newIntern = new Intern({ name: internsName, id: internsId, email: internsEmail, school: internSchool });
 
+            employeeArray.push(newIntern);
+
+        });
+
+};
+
+//creates layout for HTML page
 const createHtmlPage = () =>
     `<!DOCTYPE html>
 <html lang="en">
@@ -137,13 +162,15 @@ const createHtmlPage = () =>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <link rel="shortcut icon" type="image/x-icon" href="./dist/favicon.png">
+
     <link rel="stylesheet" type="text/css" href="./dist/styles.css" />
     <title>Team Profile Maker</title>
 </head>
 
 <body>
 <div class="jumbotron">
-<h1 class="display-4">Your Team</h1>
+<h1 class="display-4">Team Profile Maker</h1>
 <hr class="line">
 </div>
 <div class="card-set" id="cardArea">
@@ -163,13 +190,13 @@ const createHtmlPage = () =>
 
 </html>`;
 
-
+//creates HTML page
 const init = (() => fs.writeFile('./dist/index.html', createHtmlPage(), (err) =>
     err ? console.error(err) : console.log("Your HTML file is being created"))
 
 );
 
-
+//appends cards and answers to index.html file
 const appendCards = () => {
     ({ internsName, internsId, internsEmail, internSchool, managersName, managersId, managersEmail, managersNumber, engineersName, engineersId, engineersEmail, githubUser })
     const cardArea = document.getElementById('cardArea');
@@ -191,4 +218,5 @@ const appendCards = () => {
 }
 
 mainLoop();
+module.exports = employeeArray;
 

@@ -2,7 +2,7 @@
 const Engineer = require("../lib/engineer");
 
 
-
+//engineers's name test
 describe("engineer class", () => {
     describe("getName method", () => {
         it("get's engineer's name", () => {
@@ -15,7 +15,7 @@ describe("engineer class", () => {
     });
 });
 
-
+//engineers's id test
 describe("engineer class", () => {
     describe("getId method", () => {
         it("get's engineer's id", () => {
@@ -28,6 +28,7 @@ describe("engineer class", () => {
     });
 });
 
+//engineers's email test
 describe("engineer class", () => {
     describe("getEmail method", () => {
         it("get's engineer's email", () => {
@@ -40,6 +41,7 @@ describe("engineer class", () => {
     });
 });
 
+//engineers's github test
 describe("engineer class", () => {
     describe("getGithub method", () => {
         it("get's engineer's github", () => {
@@ -52,6 +54,7 @@ describe("engineer class", () => {
     });
 });
 
+//engineers's role test
 describe("engineer class", () => {
     describe("getRole method", () => {
         it("get's engineer's role", () => {

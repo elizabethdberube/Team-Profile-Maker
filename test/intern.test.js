@@ -1,7 +1,7 @@
 
 const Intern = require("../lib/intern");
 
-
+//intern's name test
 describe("intern class", () => {
     describe("getName method", () => {
         it("get's intern name", () => {
@@ -14,7 +14,7 @@ describe("intern class", () => {
     });
 });
 
-
+//intern's id test
 describe("intern class", () => {
     describe("getId method", () => {
         it("get's intern id", () => {
@@ -27,6 +27,7 @@ describe("intern class", () => {
     });
 });
 
+//intern's email test
 describe("intern class", () => {
     describe("getEmail method", () => {
         it("get's intern's email", () => {
@@ -39,6 +40,7 @@ describe("intern class", () => {
     });
 });
 
+//intern's school test
 describe("intern class", () => {
     describe("getSchool method", () => {
         it("get's intern's school", () => {
@@ -51,6 +53,7 @@ describe("intern class", () => {
     });
 });
 
+//intern's role test
 describe("intern class", () => {
     describe("getRole method", () => {
         it("get's intern's role", () => {

@@ -1,6 +1,7 @@
 
 const Employee = require("../lib/employee");
 
+//Employee's name testing
 describe("Employee class", () => {
     describe("getName method", () => {
         it("get's employee's name", () => {
@@ -13,6 +14,7 @@ describe("Employee class", () => {
     });
 });
 
+//Employee's id testing
 describe("Employee class", () => {
     describe("getId method", () => {
         it("get's employee's id", () => {
@@ -25,6 +27,7 @@ describe("Employee class", () => {
     });
 });
 
+//Employee's email testing
 describe("Employee class", () => {
     describe("getEmail method", () => {
         it("get's employee's email", () => {
@@ -37,6 +40,7 @@ describe("Employee class", () => {
     });
 });
 
+//Employee's role testing
 describe("Employee class", () => {
     describe("getRole method", () => {
         it("get's employee's role", () => {

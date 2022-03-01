@@ -1,5 +1,6 @@
 const Manager = require("../lib/manager");
 
+//manager's name test
 describe("manager class", () => {
     describe("getName method", () => {
         it("get's manager's name", () => {
@@ -12,7 +13,7 @@ describe("manager class", () => {
     });
 });
 
-
+//manager's id test
 describe("manager class", () => {
     describe("getId method", () => {
         it("get's manager's id", () => {
@@ -25,6 +26,7 @@ describe("manager class", () => {
     });
 });
 
+//manager's email test
 describe("manager class", () => {
     describe("getEmail method", () => {
         it("get's manager's email", () => {
@@ -37,6 +39,7 @@ describe("manager class", () => {
     });
 });
 
+//manager's office number test
 describe("manager class", () => {
     describe("getOfficenumber method", () => {
         it("get's manager's office number", () => {
@@ -49,6 +52,7 @@ describe("manager class", () => {
     });
 });
 
+//manager's role test
 describe("manager class", () => {
     describe("getRole method", () => {
         it("get's manager's role", () => {
