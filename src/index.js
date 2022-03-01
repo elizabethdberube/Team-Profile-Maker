@@ -10,42 +10,42 @@ let employeeArray = [];
 
 //the main loop that controls the flow of the whole thing.
 const mainLoop = () => {
-    askManager();
-    let keepGoing = true;
 
-    while (keepGoing == true) {
-        inquirer.prompt([
-            {
-                type: 'list',
-                message: 'Which of the following would you like to add?',
-                choices: ['engineer', 'intern', 'finish building my team'],
-                name: 'role',
+
+    inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which of the following would you like to add?',
+            choices: ['engineer', 'intern', 'finish building my team'],
+            name: 'role',
+
+        }
+    ])
+        .then(({ role }) => {
+            if (role == "engineer") {
+                engineerInfo().then(mainLoop);
+
 
             }
-        ])
-            .then(({ role }) => {
-                if (role == "engineer") {
-                    engineerInfo();
 
-                }
+            else if (role == "intern") {
+                internInfo().then(mainLoop);
 
-                else if (role = "intern") {
-                    internInfo();
 
-                }
+            }
 
-                else if (role = "finish building my team") {
-                    init();
-                    appendCards();
-                    return;
-                }
-            });
-    }
+            else if (role == "finish building my team") {
+                writeHTMLtoFile();
+
+                return;
+            }
+        });
+
 }
 
 //inquirer prompt for questions about the manager
 const askManager = () => {
-    inquirer.prompt([
+    return inquirer.prompt([
 
         {
             type: 'input',
@@ -71,11 +71,12 @@ const askManager = () => {
 
     ])
         //answers get pushed into array
-        .then({ managersName, managersId, managersEmail, managersNumber })
+        .then(({ managersName, managersId, managersEmail, managersNumber }) => {
 
-    let newManager = new Manager({ name: managersName, id: managersId, email: managersEmail, officenumber: managersNumber });
+            let newManager = new Manager({ name: managersName, id: managersId, email: managersEmail, officenumber: managersNumber });
 
-    employeeArray.push(newManager);
+            employeeArray.push(newManager);
+        });
 
 }
 
@@ -104,7 +105,7 @@ const engineerInfo = () => {
 
     ])
         //answers get pushed into array
-        .then(({ engineersName, engineersId, engineersEmail, githubUser }) => engineerInfo.forEach = () => {
+        .then(({ engineersName, engineersId, engineersEmail, githubUser }) => {
 
 
             let newEngineer = new Engineer({ name: engineersName, id: engineersId, email: engineersEmail, github: githubUser });
@@ -141,7 +142,7 @@ const internInfo = () => {
 
     ])
         //answers get pushed into array
-        .then(({ internsName, internsId, internsEmail, internSchool }) => engineerInfo.forEach = () => {
+        .then(({ internsName, internsId, internsEmail, internSchool }) => {
 
             let newIntern = new Intern({ name: internsName, id: internsId, email: internsEmail, school: internSchool });
 
@@ -152,8 +153,9 @@ const internInfo = () => {
 };
 
 //creates layout for HTML page
-const createHtmlPage = () =>
-    `<!DOCTYPE html>
+const createHtmlPage = () => {
+    let htmlOutput =
+        `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -174,10 +176,13 @@ const createHtmlPage = () =>
 <hr class="line">
 </div>
 <div class="card-set" id="cardArea">
+`;
+    employeeArray.forEach((employee) => {
+        htmlOutput = htmlOutput + cardHTML(employee);
 
+    })
 
-
-
+    htmlOutput = htmlOutput + `
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -189,34 +194,55 @@ const createHtmlPage = () =>
 </body>
 
 </html>`;
+    return htmlOutput;
+}
 
 //creates HTML page
-const init = (() => fs.writeFile('./dist/index.html', createHtmlPage(), (err) =>
+const writeHTMLtoFile = (() => fs.writeFile('../dist/index.html', createHtmlPage(), (err) =>
     err ? console.error(err) : console.log("Your HTML file is being created"))
 
 );
 
-//appends cards and answers to index.html file
-const appendCards = () => {
-    ({ internsName, internsId, internsEmail, internSchool, managersName, managersId, managersEmail, managersNumber, engineersName, engineersId, engineersEmail, githubUser })
-    const cardArea = document.getElementById('cardArea');
-    const div = document.createElement("div");
-    div.classList.add("cardArea");
+//creates cards to index.html file
+const cardHTML = (employee) => {
+    let markup;
+    if (employee.getRole() == "Manager") {
+        markup = `<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Name: ${employee.getName()}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Office Number: ${employee.getOfficenumber()}</h6>
+        </div>
+      `;
+    } else if (employee.getRole() == "Engineer") {
+        markup = `<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Name: ${employee.getName()}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Github: ${employee.getGithub()}</h6>
+        </div>
+      `;
 
-    const markup = `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">Name: </h5>
-        <h6 class="card-subtitle mb-2 text-muted">Role: </h6>
-        <h6 class="card-subtitle mb-2 text-muted">Email: </h6>
-        <h6 class="card-subtitle mb-2 text-muted">Office: </h6>
-
-    </div>
-    `
-    div.innerHTML = markup;
-    cardArea.innerHTML = "";
-    cardArea.appendChild(div);
+    } else if (employee.getRole() == "Intern") {
+        markup = `<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Name: ${employee.getName()}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">School: ${employee.getSchool()}</h6>
+        </div>
+      `
+    };
+    return markup;
 }
 
-mainLoop();
-module.exports = employeeArray;
+
+askManager().then(() => {
+    mainLoop();
+});
 
