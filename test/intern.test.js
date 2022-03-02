@@ -58,9 +58,9 @@ describe("intern class", () => {
     describe("getRole method", () => {
         it("get's intern's role", () => {
 
-            const intern = new Intern({ Intern });
+            const intern = new Intern("Intern");
 
-            expect(intern.getRole()).toBe(Intern);
+            expect(intern.getRole()).toBe("Intern");
 
         });
     });

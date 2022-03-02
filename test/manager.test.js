@@ -57,9 +57,9 @@ describe("manager class", () => {
     describe("getRole method", () => {
         it("get's manager's role", () => {
 
-            const manager = new Manager({ Manager });
+            const manager = new Manager("Manager");
 
-            expect(manager.getRole()).toBe(Manager);
+            expect(manager.getRole()).toBe("Manager");
         });
     });
 });

@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require("../lib/employee");
-const Manager = require("../lib/manager");
-const Engineer = require("../lib/engineer");
-const Intern = require("../lib/intern");
+const Employee = require("./lib/employee");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 
 
 let employeeArray = [];
@@ -164,9 +164,9 @@ const createHtmlPage = () => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-        <link rel="shortcut icon" type="image/x-icon" href="./dist/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="./dist/styles.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>Team Profile Maker</title>
 </head>
 
@@ -184,7 +184,7 @@ const createHtmlPage = () => {
 
     htmlOutput = htmlOutput + `
 </div>
-
+</div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -198,7 +198,7 @@ const createHtmlPage = () => {
 }
 
 //creates HTML page
-const writeHTMLtoFile = (() => fs.writeFile('../dist/index.html', createHtmlPage(), (err) =>
+const writeHTMLtoFile = (() => fs.writeFile('./dist/index.html', createHtmlPage(), (err) =>
     err ? console.error(err) : console.log("Your HTML file is being created"))
 
 );
@@ -207,34 +207,37 @@ const writeHTMLtoFile = (() => fs.writeFile('../dist/index.html', createHtmlPage
 const cardHTML = (employee) => {
     let markup;
     if (employee.getRole() == "Manager") {
-        markup = `<div class="card" style="width: 18rem;">
+        markup = `<div class="card" style="width: 20rem;">
         <div class="card-body">
             <h5 class="card-title">Name: ${employee.getName()}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
-            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a> </h6>
             <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Office Number: ${employee.getOfficenumber()}</h6>
         </div>
+        </div>
       `;
     } else if (employee.getRole() == "Engineer") {
-        markup = `<div class="card" style="width: 18rem;">
+        markup = `<div class="card" style="width: 20rem;">
         <div class="card-body">
             <h5 class="card-title">Name: ${employee.getName()}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
-            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a> </h6>
             <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Github: ${employee.getGithub()}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Github: <a href="https://www.github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a></h6>
+        </div>
         </div>
       `;
 
     } else if (employee.getRole() == "Intern") {
-        markup = `<div class="card" style="width: 18rem;">
+        markup = `<div class="card" style="width: 20rem;">
         <div class="card-body">
             <h5 class="card-title">Name: ${employee.getName()}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Role: ${employee.getRole()} </h6>
-            <h6 class="card-subtitle mb-2 text-muted">Email:${employee.getEmail()} </h6>
+            <h6 class="card-subtitle mb-2 text-muted">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a> </h6>
             <h6 class="card-subtitle mb-2 text-muted">Id: ${employee.getId()}</h6>
             <h6 class="card-subtitle mb-2 text-muted">School: ${employee.getSchool()}</h6>
+        </div>
         </div>
       `
     };
